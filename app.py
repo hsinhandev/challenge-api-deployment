@@ -1,14 +1,16 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 from preprocessing.cleaning_data import preprocess
 from predict.prediction import predict
 from vendors.utils import API_HINT
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/", methods=["GET"])
 def index():
-    return "Alive", 200
+    return "PIGGGG", 200
 
 
 @app.route("/predict", methods=["GET", "POST"])
@@ -38,4 +40,4 @@ def bad_request():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0")
