@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from preprocessing.cleaning_data import preprocess
 from predict.prediction import predict
-
+from vendors.utils import API_HINT
 
 app = Flask(__name__)
 
@@ -11,44 +11,30 @@ def index():
     return "Alive", 200
 
 
-@app.route("/predict", methods=["GET", "Post"])
+@app.route("/predict", methods=["GET", "POST"])
 def predict_page():
     if request.method == "POST":
         data = request.get_json().get("data")
 
         if not data:
             return jsonify(message="Message goes here"), 401
-        processed_data = preprocess(data)
 
+        processed_data = preprocess(data)
         response = predict(processed_data)
-        print(f"predict price {response =}")
-        return "response", 200
+
+        if response["error"] is not None:
+            return jsonify(response), 401
+
+        return jsonify(response)
+
     elif request.method == "GET":
-        message = """
-        {
-            "data": {
-                "area": int,
-                "property-type": "APARTMENT" | "HOUSE" | "OTHERS",
-                "rooms-number": int,
-                "zip-code": int,
-                "land-area": Optional[int],
-                "garden": Optional[bool],
-                "garden-area": Optional[int],
-                "equipped-kitchen": Optional[bool],
-                "full-address": Optional[str],
-                "swimming-pool": Optional[bool],
-                "furnished": Optional[bool],
-                "open-fire": Optional[bool],
-                "terrace": Optional[bool],
-                "terrace-area": Optional[int],
-                "facades-number": Optional[int],
-                "building-state": Optional[
-                    "NEW" | "GOOD" | "TO RENOVATE" | "JUST RENOVATED" | "TO REBUILD"
-                ],
-            }
-        }
-        """
-        return f"<p>Post format as follow:</p><pre>{message}</pre>"
+        return f"<p>Post format as follow:</p><pre>{API_HINT}</pre>"
+
+
+@app.errorhandler(401)
+def bad_request():
+    """Bad request."""
+    return "Go away!", 401
 
 
 if __name__ == "__main__":
