@@ -2,28 +2,9 @@ import pandas as pd
 import joblib
 from pydantic import ValidationError
 from vendors.schema import PredictQuery
-
+from vendors.utils import dummies_field, kitchen_type_map, building_condition_map
 
 model_columns = joblib.load("model/model_columns.pkl")
-dummies_field = ("property_type", "post_code", "property_sub_type", "region")
-kitchen_type_map = {
-    "USA uninstalled": 0,
-    "Not installed": 0,
-    "Installed": 1,
-    "USA installed": 1,
-    "Semi equipped": 1,
-    "USA semi equipped": 1,
-    "Hyper equipped": 2,
-    "USA hyper equipped": 2,
-}
-building_condition_map = {
-    "As new": 6,
-    "Just renovated": 5,
-    "Good": 4,
-    "To be done up": 3,
-    "To renovate": 2,
-    "To restore": 1,
-}
 
 
 def preprocess(query: dict):
@@ -50,5 +31,5 @@ def preprocess(query: dict):
         for err in e.errors():
             field = err["loc"][0]
             message = err["msg"]
-            response = f"{response}Missing field {field}: {message}."
+            response = f"{response}Missing field {field}: {message}. \n"
         return {"prediction": None, "error": response}

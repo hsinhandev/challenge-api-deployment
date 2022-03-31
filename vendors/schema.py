@@ -40,23 +40,3 @@ class PredictQuery(BaseModel):
                 "⚠️ This postal code doesn't belongs to Belgium. It must be 4 digits"
             )
         return value
-
-
-# from pydantic import ValidationError
-
-# try:
-#     external_data = {
-#         "living_area": 20,
-#         "property_type": "HOUSE",
-#         "post_code": "1000",
-#         "bedrooms": 2,
-#         "building_condition": "As new",
-#         "region": "Brussels",
-#     }
-#     query = PredictQuery(**external_data)
-#     print(f"{query = }")
-# except ValidationError as e:
-#     for err in e.errors():
-#         field = err["loc"][0]
-#         message = err["msg"]
-#         print(f"Missing field {field}: {message}")
