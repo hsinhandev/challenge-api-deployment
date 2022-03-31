@@ -4,7 +4,7 @@ WORKDIR /app
 
 ENV FLASK_APP=app.py
 
-ENV FLASK_ENV=production
+ENV FLASK_ENV=development
 
 COPY ./requirements.txt .
 

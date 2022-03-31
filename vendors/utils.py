@@ -1,4 +1,4 @@
-API_HINT = """
+PREDICTQUERY_EXAMPLE = """
     {
         "data": {
             "area": int,
