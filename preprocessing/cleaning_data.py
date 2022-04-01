@@ -27,9 +27,10 @@ def preprocess(query: dict):
         return {"prediction": df, "error": None}
 
     except ValidationError as e:
-        response = ""
+        response = []
         for err in e.errors():
             field = err["loc"][0]
             message = err["msg"]
-            response = f"{response}Missing field {field}: {message}. \n"
+            response.append({"field": field, "message": message})
+            # response = f"{response}Missing field {field}: {message}. \n"
         return {"prediction": None, "error": response}

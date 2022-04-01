@@ -1,9 +1,9 @@
-from typing import Optional, Literal
+from typing import Optional, Literal, Union
 from pydantic import BaseModel, validator, PositiveInt
 
 
 class PredictQuery(BaseModel):
-    living_area: PositiveInt
+    living_area: Union[PositiveInt, float]
     property_type: Literal["APARTMENT", "HOUSE"]
     post_code: int
     bedrooms: PositiveInt
