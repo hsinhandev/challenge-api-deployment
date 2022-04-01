@@ -17,6 +17,9 @@ def index():
 @app.route("/predict", methods=["GET", "POST"])
 def predict_page():
     if request.method == "POST":
+        if not isinstance(request.data, dict):
+            return jsonify(message="🚫 Missing data object"), 400
+
         data = request.get_json().get("data")
 
         if not data:
@@ -35,4 +38,4 @@ def predict_page():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
 
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
