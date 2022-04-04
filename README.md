@@ -48,7 +48,9 @@ project/
 - The `vendors` folders contains application's utilities.
 
 ## Timeline
+```markdown
 Repository: challenge-api-deployment
 Solo Project
 Duration: 5 days
 Deadline: 01/04/2022 16:00 (code + email sent)
+```
