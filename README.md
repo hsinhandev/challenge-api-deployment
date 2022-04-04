@@ -6,7 +6,7 @@ The real estate company "ImmoEliza" is really happy about your regression model.
 ## Usage
 👉  Send POST request to `/predict` endpoint according to the [documentation](https://immo-eliza-flask-api.herokuapp.com/predict), it will return the prediction price of the property.
 
-- `/predict endpoint`: `https://immo-eliza-flask-api.herokuapp.com/predict`
+- `/predict` endpoint: `https://immo-eliza-flask-api.herokuapp.com/predict`
 - [JSON format documentation](https://immo-eliza-flask-api.herokuapp.com/predict)
 
 ## Tooling
