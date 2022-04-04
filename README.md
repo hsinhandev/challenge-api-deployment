@@ -1,4 +1,5 @@
 # Deploy ML model with Flask + Docker
+<img src="./assets/flowchart.png" title="flowchart" alt="flask application API flow chart" height="auto" width="100%">
 
 ## Description
 The real estate company "ImmoEliza" is really happy about your regression model. They would like you to create an API to let their web-developers create a website around it.
@@ -13,7 +14,7 @@ The real estate company "ImmoEliza" is really happy about your regression model.
 - flask
 - docker
 - heroku
-- scikit learn
+- scikit-learn
 - pandas
 
 ## Installation
