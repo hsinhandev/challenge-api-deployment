@@ -1,7 +1,7 @@
 import joblib
 import pandas as pd
 
-model = joblib.load("model/finalized_model.pkl")
+model = joblib.load("model/linear_regression_model.pkl")
 
 
 def predict(data: dict):
