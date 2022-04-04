@@ -1,27 +1,25 @@
-PREDICTQUERY_EXAMPLE = """
+import json
+
+PREDICT_QUERY_EXAMPLE = """
     {
         "data": {
-            "area": int,
-            "property-type": "APARTMENT" | "HOUSE" | "OTHERS",
-            "rooms-number": int,
-            "zip-code": int,
-            "land-area": Optional[int],
-            "garden": Optional[bool],
-            "garden-area": Optional[int],
-            "equipped-kitchen": Optional[bool],
-            "full-address": Optional[str],
-            "swimming-pool": Optional[bool],
-            "furnished": Optional[bool],
-            "open-fire": Optional[bool],
-            "terrace": Optional[bool],
-            "terrace-area": Optional[int],
-            "facades-number": Optional[int],
-            "building-state": Optional[
-                "NEW" | "GOOD" | "TO RENOVATE" | "JUST RENOVATED" | "TO REBUILD"
-            ],
+                "living_area": "Union[PositiveInt, float]",
+                "property_type": "APARTMENT | HOUSE",
+                "post_code": "int",
+                "bedrooms": "PositiveInt",
+                "has_garden": "Optional[bool]",
+                "garden_surface": "Optional[PositiveInt]",
+                "kitchen_type": "Optional[USA uninstalled | Not installed | Installed | USA installed | Semi equipped | USA semi equipped | Hyper equipped | USA hyper equipped]",
+                "has_swimming_pool": "Optional[bool]",
+                "has_furnished": "Optional[bool]",
+                "has_terrace": "Optional[bool]",
+                "terrace_surface": "Optional[PositiveInt]",
+                "frontages": "Optional[PositiveInt]",
+                "building_condition": "Optional[As new | Just renovated | To be done up | To renovate | To restore]"
         }
     }
     """
+PREDICT_QUERY_JSON = json.loads(PREDICT_QUERY_EXAMPLE)
 
 dummies_field = ("property_type", "post_code", "property_sub_type", "region")
 kitchen_type_map = {
