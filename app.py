@@ -17,7 +17,7 @@ def index():
 @app.route("/predict", methods=["GET", "POST"])
 def predict_page():
     if request.method == "POST":
-        # deal with empty and POST request and invalid JSON
+        # deal with empty POST request and invalid JSON
         if not request.content_type or not request.content_type.startswith(
             "application/json"
         ):
