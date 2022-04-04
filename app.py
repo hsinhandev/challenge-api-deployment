@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from preprocessing.cleaning_data import preprocess
 from predict.prediction import predict
 from vendors.utils import PREDICTQUERY_EXAMPLE
@@ -17,8 +17,14 @@ def index():
 @app.route("/predict", methods=["GET", "POST"])
 def predict_page():
     if request.method == "POST":
-        if not isinstance(request.data, dict):
-            return jsonify(message="🚫 Missing data object"), 400
+        # deal with empty and POST request and invalid JSON
+        if not request.content_type or not request.content_type.startswith(
+            "application/json"
+        ):
+            return (
+                jsonify(message="🚫 Invalid content-type. Must be application/json."),
+                400,
+            )
 
         data = request.get_json().get("data")
 

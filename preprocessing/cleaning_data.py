@@ -7,9 +7,10 @@ from vendors.utils import dummies_field, kitchen_type_map, building_condition_ma
 model_columns = joblib.load("model/model_columns.pkl")
 
 
-def preprocess(query: dict):
+def preprocess(payload: dict):
     try:
-        _query = PredictQuery(**query)
+        _query = PredictQuery(**payload)
+
         df = pd.DataFrame(dict(_query), index=[0])
         df.replace({False: 0, True: 1}, inplace=True)
         df = df.replace(
@@ -32,5 +33,5 @@ def preprocess(query: dict):
             field = err["loc"][0]
             message = err["msg"]
             response.append({"field": field, "message": message})
-            # response = f"{response}Missing field {field}: {message}. \n"
+
         return {"prediction": None, "error": response}
