@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from preprocessing.cleaning_data import preprocess
 from predict.prediction import predict
-from vendors.utils import PREDICT_QUERY_EXAMPLE, PREDICT_QUERY_JSON
+from vendors.utils import PREDICT_QUERY_JSON
 import os
 
 app = Flask(__name__)
@@ -31,7 +31,7 @@ def predict_endpoint():
         )
 
     data = request.get_json().get("data")
-    if not data:
+    if data is None:
         return jsonify(message="🚫 Missing data object"), 400
 
     processed_data = preprocess(data)

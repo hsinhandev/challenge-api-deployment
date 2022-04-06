@@ -21,7 +21,7 @@ PREDICT_QUERY_EXAMPLE = """
     """
 PREDICT_QUERY_JSON = json.loads(PREDICT_QUERY_EXAMPLE)
 
-dummies_field = ("property_type", "post_code", "property_sub_type", "region")
+dummies_field = {"property_type", "post_code", "property_sub_type", "region"}
 kitchen_type_map = {
     "USA uninstalled": 0,
     "Not installed": 0,
